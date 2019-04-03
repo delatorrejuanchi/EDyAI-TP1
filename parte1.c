@@ -15,6 +15,7 @@
 // El archivo generado (salida.txt) tendra las siguientes caracteristicas:
 //  - Cada linea representa una persona generada
 //  - Los campos estan separadas por ","
+// El orden de los campos son: nombre, edad, pais
 
 GList generar_personas(int numDatos, GList nombres, GList paises) {
   GList personas = glist_crear();
