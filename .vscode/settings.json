@@ -1,8 +1,0 @@
-{
-  "files.associations": {
-    "*.html.erb": "erb",
-    "*.lock": "ruby",
-    "pre-commit": "bat",
-    "stddef.h": "c"
-  }
-}
