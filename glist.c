@@ -23,6 +23,18 @@ GList glist_agregar_inicio(GList lista, void *dato) {
   return nuevoNodo;
 }
 
+GList glist_agregar_final(GList lista, void *dato) {
+  GNodo *nuevoNodo = malloc(sizeof(GNodo));
+  nuevoNodo->dato = dato;
+  nuevoNodo->sig = NULL;
+  GNodo *nodo = lista;
+
+  while (nodo != NULL) nodo = nodo->sig;
+
+  nodo->sig = nuevoNodo;
+  return lista;
+}
+
 void glist_recorrer(GList lista, FVisitante visitar) {
   for (GNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) visitar(nodo->dato);
 }

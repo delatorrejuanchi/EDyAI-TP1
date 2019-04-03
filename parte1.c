@@ -4,6 +4,18 @@
 #include "glist.h"
 #include "util.h"
 
+// MODO DE USO:
+// ./parte1 [nombres.txt] [paises.txt] [salida.txt]
+// Se genera un archivo con el nombre [salida.txt] con las personas generadas
+// de forma alertoria segun los nombres y pasises ingresados por los archivos
+
+// Los archivos a recibir (nombres.txt o paises.txt) deben cumplir lo siguiente:
+//  - Cada linea tiene que ser un pais
+
+// El archivo generado (salida.txt) tendra las siguientes caracteristicas:
+//  - Cada linea representa una persona generada
+//  - Los campos estan separadas por ","
+
 GList generar_personas(int numDatos, GList nombres, GList paises) {
   GList personas = glist_crear();
 
@@ -13,7 +25,7 @@ GList generar_personas(int numDatos, GList nombres, GList paises) {
     persona->edad = rand() % 100 + 1;
     persona->lugarDeNacimiento = glist_dato_random(paises);
 
-    personas = glist_agregar_inicio(personas, persona);
+    personas = glist_agregar_final(personas, persona);
   }
 
   return personas;

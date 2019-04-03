@@ -30,10 +30,10 @@ void glist_destruir(GList lista);
  */
 int glist_vacia(GList lista);
 
-// /**
-//  * Agrega un elemento al final de la lista.
-//  */
-// GList glist_agregar_final(GList lista, int dato);
+/**
+ * Agrega un elemento al final de la lista.
+ */
+GList glist_agregar_final(GList lista, void* dato);
 
 /**
  * Agrega un elemento al inicio de la lista.
