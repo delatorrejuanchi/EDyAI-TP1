@@ -44,6 +44,13 @@ void *obtener_nombre(void *dato) {
   return nombre;
 }
 
+// FPredicado
+int tiene_nombre_corto(void *dato) {
+  return strlen(((Persona *)dato)->nombre) <= 6;
+}
+
+int es_mayor_de_edad(void *dato) { return ((Persona *)dato)->edad >= 18; }
+
 int main() {
   GList personasRaw = glist_desde_archivo("personas.txt");
   GList personas = glist_map(personasRaw, parse_persona);
@@ -53,17 +60,17 @@ int main() {
 
   // Maps
   // 1)
-  GList envejecidas =
-      map_y_escribir(personas, "envejecidas.txt", envejecer, escribir_persona);
-  glist_recorrer(envejecidas, imprimir_persona);
+  map_y_escribir(personas, "envejecidas.txt", envejecer, escribir_persona);
   // 2)
-  GList nombres =
-      map_y_escribir(personas, "nombres.txt", obtener_nombre, escribir_cadena);
-  glist_recorrer(nombres, imprimir_cadena);
+  map_y_escribir(personas, "nombres.txt", obtener_nombre, escribir_cadena);
 
   // Filters
   // 1)
+  filter_y_escribir(personas, "con_nombres_cortos.txt", tiene_nombre_corto,
+                    escribir_persona);
   // 2)
+  filter_y_escribir(personas, "mayores_de_edad.txt", es_mayor_de_edad,
+                    escribir_persona);
 
   return 0;
 }

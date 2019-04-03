@@ -43,6 +43,11 @@ int main(int argc, char* argv[]) {
 
   GList nombres = glist_desde_archivo(argv[1]);
   GList paises = glist_desde_archivo(argv[2]);
+  if (nombres == NULL || paises == NULL) {
+    printf("Error: Verifique que los archivos ingresados existen y que son no");
+    printf("vacíos.\n");
+    return -1;
+  }
 
   GList personas = generar_personas(50, nombres, paises);
 
