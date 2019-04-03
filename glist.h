@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-// TODO: corregir destruir y agregar copia
+// TODO: corregir destruir y agregar copia para los filtros
 
 typedef void (*FVisitante)(void *dato);
 typedef void (*FEscritora)(void *dato, FILE *archivo);

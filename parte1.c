@@ -5,29 +5,23 @@
 #include "util.h"
 
 // MODO DE USO:
-// Si no lo hizo todavia, para copilar debe ejecutar los siguientes comandos:
+// Si no lo hizo todavia, compile ejecutando:
 //  $ gcc -c util.c -Wall -pedantic
 //  $ gcc -c glist.c -Wall -pedantic
 //  $ gcc -o parte1 parte1.c glist.o util.o -Wall -pedantic
 // Luego:
 //  $ ./parte1 [nombres.txt] [paises.txt] [salida.txt]
 // Se genera un archivo con el nombre [salida.txt] con las personas generadas
-// de forma alertoria segun los nombres y pasises ingresados por los archivos
-
-// Los archivos a recibir ([nombres.txt] o [paises.txt]) deben cumplir lo
-// siguiente:
-//  - Cada linea representa un dato
-
+// de forma alertoria segun los nombres y pasises en los archivos ingresados.
+// Los archivos [nombres.txt] y [paises.txt] deben tener un dato por linea.
 // El archivo generado [salida.txt] tendra las siguientes caracteristicas:
 //  - Cada linea representa una persona generada
-//  - El formato de salida es: nombre, edad, pais
+//  - El formato de salida es: nombre, edad, lugarDeNacimiento
 
 // generar_personas: GList GList -> GList
 // Recibe una lista de nombres y una de paises,
-// Genera una lista de 2000 personas con:
-//  - nombre y pais alertorios
-//  - 0 < edad <= 100
-// Devuelve una lista con las personas generadas.
+// Genera y devuelve una lista de 2000 personas con nombre y lugarDeNacimiento
+// elegidos aleatoriamente y edad entre 1 y 100.
 GList generar_personas(GList nombres, GList paises) {
   GList personas = glist_crear();
 

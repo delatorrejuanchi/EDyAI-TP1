@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// TODO: completar
 Persona *duplicar_persona(Persona *persona) {
   Persona *personaNueva = malloc(sizeof(Persona));
   personaNueva->nombre = malloc(sizeof(char) * strlen(persona->nombre));
@@ -15,6 +16,8 @@ Persona *duplicar_persona(Persona *persona) {
   return personaNueva;
 }
 
+// TODO: ver el tema de los caracteres especiales
+// TODO: completar
 char *get_line(FILE *archivo) {
   int tamano = 16;
   char *buffer = malloc(sizeof(char) * tamano);
