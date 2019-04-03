@@ -39,20 +39,38 @@ char *get_line(FILE *archivo) {
   return buffer;
 }
 
-void escribir_persona(void *dato, FILE *archivo) {
-  Persona *persona = dato;
-  fprintf(archivo, "%s, %d, %s\n", persona->nombre, persona->edad,
-          persona->lugarDeNacimiento);
-}
-
-void escribir_cadena(void *dato, FILE *archivo) {
-  fprintf(archivo, "%s\n", (char *)dato);
-}
-
+// imprimir_persona: void* -> void
+// Recibe un puntero a un dato (Persona*),
+// Muestra en pantalla los datos de la persona con el formato:
+// "nombre, edad, lugarDeNacimiento"
+// Esta funcion es de tipo FVisitante.
 void imprimir_persona(void *dato) {
   Persona *persona = dato;
   printf("%s, %d, %s\n", persona->nombre, persona->edad,
          persona->lugarDeNacimiento);
 }
 
+// imprimir_cadena: void* -> void
+// Recibe un puntero a un dato (char*),
+// Muestra en pantalla el contenido de la cadena.
+// Esta funcion es de tipo FVisitante.
 void imprimir_cadena(void *dato) { printf("%s\n", (char *)dato); }
+
+// escribir_persona: void* FILE* -> void
+// Recibe un puntero a un dato (Persona*) y un puntero a un archivo,
+// Escribe una linea en el archivo con los datos de la persona con el formato:
+// "nombre, edad, lugarDeNacimiento"
+// Esta funcion es de tipo FEscritora.
+void escribir_persona(void *dato, FILE *archivo) {
+  Persona *persona = dato;
+  fprintf(archivo, "%s, %d, %s\n", persona->nombre, persona->edad,
+          persona->lugarDeNacimiento);
+}
+
+// escribir_cadena: void* FILE* -> void
+// Recibe un puntero a un dato (char*) y un puntero a un archivo,
+// Escribe una linea en el archivo con el contenido de la cadena.
+// Esta funcion es de tipo FEscritora.
+void escribir_cadena(void *dato, FILE *archivo) {
+  fprintf(archivo, "%s\n", (char *)dato);
+}

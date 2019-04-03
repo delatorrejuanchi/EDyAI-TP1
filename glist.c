@@ -27,8 +27,8 @@ GList glist_agregar_final(GList lista, void *dato) {
   GNodo *nuevoNodo = malloc(sizeof(GNodo));
   nuevoNodo->dato = dato;
   nuevoNodo->sig = NULL;
-  GNodo *nodo = lista;
 
+  GNodo *nodo = lista;
   while (nodo != NULL) nodo = nodo->sig;
 
   nodo->sig = nuevoNodo;

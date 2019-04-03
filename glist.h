@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+// TODO: corregir destruir y agregar copia
+
 typedef void (*FVisitante)(void *dato);
 typedef void (*FEscritora)(void *dato, FILE *archivo);
 typedef void *(*FMap)(void *dato);
@@ -15,68 +17,70 @@ typedef struct _GNodo {
 
 typedef GNodo *GList;
 
-/**
- * Devuelve una lista vacía.
- */
+// glist_crear: -> GList
+// Devuelve una lista vacía
 GList glist_crear();
 
-/**
- * Destruye la lista.
- */
+// glist_destruir: GList -> void;
+// Recibe una lista,
+// La destruye.
 void glist_destruir(GList lista);
 
-/**
- * Determina si la lista es vacía.
- */
+// glist_vacia: GList -> int;
+// Recibe una lista,
+// Devuelve 1 si la lista es vacía, 0 en caso contrario.
 int glist_vacia(GList lista);
 
-/**
- * Agrega un elemento al final de la lista.
- */
-GList glist_agregar_final(GList lista, void* dato);
-
-/**
- * Agrega un elemento al inicio de la lista.
- */
+// glist_agregar_inicio: GList void* -> GList
+// Recibe una lista y un puntero a un dato,
+// Lo agrega al inicio,
+// Devuelve la lista.
 GList glist_agregar_inicio(GList lista, void *dato);
 
-/**
- * Recorrido de la lista, utilizando la FVisitante recibida como
- * parametro.
- */
+// glist_agregar_final: GList void* -> GList
+// Recibe una lista y un puntero a un dato,
+// Lo agrega al final,
+// Devuelve la lista.
+GList glist_agregar_final(GList lista, void *dato);
+
+// glist_recorrer: GList FVisitante -> void
+// Recibe una lista y una FVisitante,
+// Recorre la lista y ejecuta la FVisitante al dato de cada nodo.
 void glist_recorrer(GList lista, FVisitante visitar);
 
-/**
- * Devuelve la longitud de una lista.
- */
+// glist_longitud: GList -> int
+// Recibe una lista,
+// Devuelve la longitud de la lista.
 int glist_longitud(GList lista);
 
-/**
- * Devuelve un dato al azar de la lista.
- */
+// glist_dato_random: GList -> void*
+// Recibe una lista,
+// Devuelve el dato de un nodo de la lista (elegido al azar)
 void *glist_dato_random(GList lista);
 
-/**
- * Crea una lista con las lineas de un archivo. Si el archivo no existe,
- * devuelve NULL.
- */
+// glist_desde_archivo: char* -> GList
+// Recibe un nombre de archivo,
+// Crea y devuelve una lista cuyos nodos contienen las lineas del archivo.
+// Si el archivo no existe, devuelve NULL.
 GList glist_desde_archivo(char *nombre);
 
-/**
- * Escribe una lista a un archivo, recorriendo la lista y escribiendo cada nodo
- * con una FEscritora recibida como parametro.
- */
+// glist_a_archivo: GList char* FEscritora -> void
+// Recibe una lista, un nombre de archivo y una FEscritora,
+// Recorre la lista y ejecuta la FEscritora con el dato de cada nodo,
+// escribiendo asi un archivo con el nombre recibido y contenido generado por la
+// FEscritora.
 void glist_a_archivo(GList lista, char *nombre, FEscritora escribir);
 
-/*
- * Devuelve una nueva lista con el resultado de aplicar a los elementos la
- * funcion pasada
- */
+// glist_map: GList FMap -> GList
+// Recibe una lista y una FMap,
+// Crea y devuelve una lista cuyos datos son los resultados de aplicar la FMap a
+// cada dato de la lista recibida.
 GList glist_map(GList lista, FMap f);
 
-/*
- * Devuelve una nueva lista con los elementos que cumplen con el predicado dado
- */
+// glist_filter: GList FPredicado -> GList
+// Recibe una lista y una FPredicado,
+// Crea y devuelve una lista cuyos datos son solo aquellos para los cuales la
+// FPredicado aplicada a cada dato devuelve verdadero.
 GList glist_filter(GList lista, FPredicado p);
 
 #endif /* __GLIST_H__ */
