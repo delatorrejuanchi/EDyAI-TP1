@@ -4,6 +4,8 @@
 #include "glist.h"
 #include "util.h"
 
+#define CANTIDAD 10000000
+
 // MODO DE USO:
 // Si no lo hizo todavia, compile ejecutando:
 //  $ gcc -c util.c -Wall -pedantic
@@ -20,18 +22,19 @@
 
 // generar_personas: GList GList -> GList
 // Recibe una lista de nombres y una de paises,
-// Genera y devuelve una lista de 2000 personas con nombre y lugarDeNacimiento
-// elegidos aleatoriamente y edad entre 1 y 100.
+// Genera y devuelve una lista de CANTIDAD personas con nombre y
+// lugarDeNacimiento elegidos aleatoriamente y edad entre 1 y 100.
 GList generar_personas(GList nombres, GList paises) {
   GList personas = glist_crear();
 
-  for (int i = 0; i < 2000; i++) {
+  for (int i = 0; i < CANTIDAD; i++) {
     Persona* persona = malloc(sizeof(Persona));
-    persona->nombre = glist_dato_random(nombres);
-    persona->edad = rand() % 100 + 1;
-    persona->lugarDeNacimiento = glist_dato_random(paises);
 
-    personas = glist_agregar_final(personas, persona);
+    persona->nombre = copiar_cadena(glist_dato_random(nombres));
+    persona->edad = rand() % 100 + 1;
+    persona->lugarDeNacimiento = copiar_cadena(glist_dato_random(paises));
+
+    personas = glist_agregar_inicio(personas, persona);
   }
 
   return personas;
@@ -58,6 +61,10 @@ int main(int argc, char* argv[]) {
   GList personas = generar_personas(nombres, paises);
 
   glist_a_archivo(personas, argv[3], escribir_persona);
+
+  glist_destruir(nombres, destruir_cadena);
+  glist_destruir(paises, destruir_cadena);
+  glist_destruir(personas, destruir_persona);
 
   return 0;
 }

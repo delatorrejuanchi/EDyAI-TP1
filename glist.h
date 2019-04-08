@@ -3,10 +3,10 @@
 
 #include <stdio.h>
 
-// TODO: corregir destruir y agregar copia para los filtros
-
+typedef void (*FDestructora)(void *dato);
 typedef void (*FVisitante)(void *dato);
 typedef void (*FEscritora)(void *dato, FILE *archivo);
+typedef void *(*FCopiadora)(void *dato);
 typedef void *(*FMap)(void *dato);
 typedef int (*FPredicado)(void *dato);
 
@@ -21,10 +21,11 @@ typedef GNodo *GList;
 // Devuelve una lista vacía
 GList glist_crear();
 
+// TODO: corregir
 // glist_destruir: GList -> void;
 // Recibe una lista,
 // La destruye.
-void glist_destruir(GList lista);
+void glist_destruir(GList lista, FDestructora destruir);
 
 // glist_vacia: GList -> int;
 // Recibe una lista,
@@ -71,16 +72,18 @@ GList glist_desde_archivo(char *nombre);
 // FEscritora.
 void glist_a_archivo(GList lista, char *nombre, FEscritora escribir);
 
+// TODO: corregir
 // glist_map: GList FMap -> GList
 // Recibe una lista y una FMap,
 // Crea y devuelve una lista cuyos datos son los resultados de aplicar la FMap a
 // cada dato de la lista recibida.
-GList glist_map(GList lista, FMap f);
+GList glist_map(GList lista, FMap f, FCopiadora copiar);
 
+// TODO: corregir
 // glist_filter: GList FPredicado -> GList
 // Recibe una lista y una FPredicado,
 // Crea y devuelve una lista cuyos datos son solo aquellos para los cuales la
 // FPredicado aplicada a cada dato devuelve verdadero.
-GList glist_filter(GList lista, FPredicado p);
+GList glist_filter(GList lista, FPredicado p, FCopiadora copiar);
 
 #endif /* __GLIST_H__ */

@@ -9,8 +9,6 @@ typedef struct {
   char *lugarDeNacimiento;
 } Persona;
 
-Persona *duplicar_persona(Persona *persona);
-
 char *get_line(FILE *archivo);
 
 void escribir_persona(void *dato, FILE *archivo);
@@ -18,5 +16,11 @@ void escribir_cadena(void *dato, FILE *archivo);
 
 void imprimir_persona(void *dato);
 void imprimir_cadena(void *dato);
+
+void destruir_persona(void *dato);
+void destruir_cadena(void *dato);
+
+void *copiar_persona(void *dato);
+void *copiar_cadena(void *dato);
 
 #endif /* __UTIL_H__ */

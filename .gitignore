@@ -2,4 +2,4 @@ parte1
 parte2
 *.o
 .vscode/
-personas.txt
+*.txt
