@@ -58,7 +58,7 @@ void *glist_dato_random(GList lista) {
   return nodo->dato;
 }
 
-GList glist_desde_archivo(char *nombre) {
+GList glist_desde_archivo(char *nombre, int permitirSimbolos) {
   FILE *archivo = fopen(nombre, "r");
 
   if (archivo == NULL) return NULL;
@@ -66,7 +66,7 @@ GList glist_desde_archivo(char *nombre) {
   GList lista = glist_crear();
 
   char *linea;
-  while ((linea = get_line(archivo)) != NULL) {
+  while ((linea = get_line(archivo, permitirSimbolos)) != NULL) {
     lista = glist_agregar_inicio(lista, linea);
   }
 

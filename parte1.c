@@ -4,7 +4,7 @@
 #include "glist.h"
 #include "util.h"
 
-#define CANTIDAD 10000000
+#define CANTIDAD 2000
 
 // MODO DE USO:
 // Si no lo hizo todavia, compile ejecutando:
@@ -50,8 +50,8 @@ int main(int argc, char* argv[]) {
 
   srand(time(NULL));
 
-  GList nombres = glist_desde_archivo(argv[1]);
-  GList paises = glist_desde_archivo(argv[2]);
+  GList nombres = glist_desde_archivo(argv[1], 0);
+  GList paises = glist_desde_archivo(argv[2], 0);
   if (nombres == NULL || paises == NULL) {
     printf("Error: Verifique que los archivos ingresados existen y que son no");
     printf("vacíos.\n");

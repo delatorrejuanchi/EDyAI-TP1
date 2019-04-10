@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  GList personasRaw = glist_desde_archivo(argv[1]);
+  GList personasRaw = glist_desde_archivo(argv[1], 1);
   GList personas = glist_map(personasRaw, parse_persona, copiar_cadena);
   glist_destruir(personasRaw, destruir_cadena);
 

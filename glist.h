@@ -63,7 +63,7 @@ void *glist_dato_random(GList lista);
 // Recibe un nombre de archivo,
 // Crea y devuelve una lista cuyos nodos contienen las lineas del archivo.
 // Si el archivo no existe, devuelve NULL.
-GList glist_desde_archivo(char *nombre);
+GList glist_desde_archivo(char *nombre, int permitirSimbolos);
 
 // glist_a_archivo: GList char* FEscritora -> void
 // Recibe una lista, un nombre de archivo y una FEscritora,

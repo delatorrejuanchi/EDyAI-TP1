@@ -9,7 +9,8 @@ typedef struct {
   char *lugarDeNacimiento;
 } Persona;
 
-char *get_line(FILE *archivo);
+char *get_line(FILE *archivo, int permitirSimbolos);
+int es_simbolo(char c);
 
 void escribir_persona(void *dato, FILE *archivo);
 void escribir_cadena(void *dato, FILE *archivo);
