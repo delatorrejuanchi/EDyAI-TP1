@@ -13,6 +13,7 @@ typedef int (*FPredicado)(void *dato);
 typedef struct _GNodo {
   void *dato;
   struct _GNodo *sig;
+  struct _GNodo *ant;
 } GNodo;
 
 typedef GNodo *GList;

@@ -6,8 +6,13 @@
 
 #define CANTIDAD 2000
 
-// MODO DE USO:
-// Si no lo hizo todavia, compile ejecutando:
+// TODO: terminar la documentacion, revisar la de todas las funciones porque
+// hubieron muchos cambios. Documentar como resolvemos el tema de los caracteres
+// especiales y pensar si pueden haber bugs en ese tema. Explicar por que
+// sacrificamos performance por usar una GList doblemente enlazada circular.
+
+// MODO DE USO: Si no lo hizo todavia, compile
+// ejecutando:
 //  $ gcc -c util.c -Wall -pedantic
 //  $ gcc -c glist.c -Wall -pedantic
 //  $ gcc -o parte1 parte1.c glist.o util.o -Wall -pedantic
@@ -54,12 +59,11 @@ int main(int argc, char* argv[]) {
   GList paises = glist_desde_archivo(argv[2], 0);
   if (nombres == NULL || paises == NULL) {
     printf("Error: Verifique que los archivos ingresados existen y que son no");
-    printf("vacíos.\n");
+    printf(" vacíos.\n");
     return -1;
   }
 
   GList personas = generar_personas(nombres, paises);
-
   glist_a_archivo(personas, argv[3], escribir_persona);
 
   glist_destruir(nombres, destruir_cadena);

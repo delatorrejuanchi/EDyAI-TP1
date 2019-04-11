@@ -7,12 +7,13 @@ GList glist_crear() { return NULL; }
 
 void glist_destruir(GList lista, FDestructora destruir) {
   GNodo *nodoAEliminar;
-  while (lista != NULL) {
+  GNodo *inicio = lista;
+  do {
     nodoAEliminar = lista;
     destruir(nodoAEliminar->dato);
     lista = lista->sig;
     free(nodoAEliminar);
-  }
+  } while (lista != inicio);
 }
 
 int glist_vacia(GList lista) { return lista == NULL; }
@@ -20,31 +21,56 @@ int glist_vacia(GList lista) { return lista == NULL; }
 GList glist_agregar_inicio(GList lista, void *dato) {
   GNodo *nuevoNodo = malloc(sizeof(GNodo));
   nuevoNodo->dato = dato;
+
+  if (glist_vacia(lista)) {
+    nuevoNodo->sig = nuevoNodo->ant = nuevoNodo;
+    return nuevoNodo;
+  }
+
   nuevoNodo->sig = lista;
+  nuevoNodo->ant = lista->ant;
+
+  lista->ant = nuevoNodo;
+  nuevoNodo->ant->sig = nuevoNodo;
+
   return nuevoNodo;
 }
 
 GList glist_agregar_final(GList lista, void *dato) {
   GNodo *nuevoNodo = malloc(sizeof(GNodo));
   nuevoNodo->dato = dato;
-  nuevoNodo->sig = NULL;
 
-  if (lista == NULL) return nuevoNodo;
+  if (glist_vacia(lista)) {
+    nuevoNodo->sig = nuevoNodo->ant = nuevoNodo;
+    return nuevoNodo;
+  }
 
-  GNodo *nodo = lista;
-  while (nodo->sig != NULL) nodo = nodo->sig;
+  nuevoNodo->sig = lista;
+  nuevoNodo->ant = lista->ant;
 
-  nodo->sig = nuevoNodo;
+  lista->ant = nuevoNodo;
+  nuevoNodo->ant->sig = nuevoNodo;
+
   return lista;
 }
 
 void glist_recorrer(GList lista, FVisitante visitar) {
-  for (GNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) visitar(nodo->dato);
+  GNodo *nodo = lista;
+  do {
+    visitar(nodo->dato);
+    nodo = nodo->sig;
+  } while (nodo != lista);
 }
 
 int glist_longitud(GList lista) {
   int longitud = 0;
-  for (GNodo *i = lista; i != NULL; i = i->sig) longitud++;
+
+  GNodo *nodo = lista;
+  do {
+    longitud++;
+    nodo = nodo->sig;
+  } while (nodo != lista);
+
   return longitud;
 }
 
@@ -78,30 +104,37 @@ void glist_a_archivo(GList lista, char *nombre, FEscritora escribir) {
   FILE *archivo;
   archivo = fopen(nombre, "w+");
 
-  for (GNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
+  GNodo *nodo = lista;
+  do {
     escribir(nodo->dato, archivo);
-  }
+    nodo = nodo->sig;
+  } while (nodo != lista);
 
   fclose(archivo);
 }
 
 GList glist_map(GList lista, FMap f, FCopiadora copiar) {
   GList nuevaLista = glist_crear();
-  for (GNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
+
+  GNodo *nodo = lista;
+  do {
     void *dato = copiar(nodo->dato);
     nuevaLista = glist_agregar_inicio(nuevaLista, f(dato));
-    // TODO: importa el orden?
-  }
+    nodo = nodo->sig;
+  } while (nodo != lista);
 
   return nuevaLista;
 }
 
 GList glist_filter(GList lista, FPredicado p, FCopiadora copiar) {
   GList nuevaLista = glist_crear();
-  for (GNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
+
+  GNodo *nodo = lista;
+  do {
     if (p(nodo->dato))
-      nuevaLista = glist_agregar_inicio(nuevaLista, copiar(nodo->dato));
-  }
+      nuevaLista = glist_agregar_final(nuevaLista, copiar(nodo->dato));
+    nodo = nodo->sig;
+  } while (nodo != lista);
 
   return nuevaLista;
 }

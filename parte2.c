@@ -47,7 +47,7 @@ GList map_y_escribir(GList lista, char *nombre, FMap f, FEscritora e,
 GList filter_y_escribir(GList lista, char *nombre, FPredicado p, FEscritora e,
                         FCopiadora copiar) {
   GList nuevaLista = glist_filter(lista, p, copiar);
-  glist_a_archivo(nuevaLista, nombre, e);
+  // glist_a_archivo(nuevaLista, nombre, e);
   return nuevaLista;
 }
 
@@ -126,9 +126,8 @@ int main(int argc, char *argv[]) {
   // Filters
   // 1)
   GList conNombresCortos =
-      filter_y_escribir(personas, "con_nombres_cortos.txt",
-
-                        tiene_nombre_corto, escribir_persona, copiar_persona);
+      filter_y_escribir(personas, "con_nombres_cortos.txt", tiene_nombre_corto,
+                        escribir_persona, copiar_persona);
   glist_destruir(conNombresCortos, destruir_persona);
   // 2)
   GList mayoresDeEdad =
