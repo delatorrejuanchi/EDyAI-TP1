@@ -6,11 +6,6 @@
 
 #define CANTIDAD 2000
 
-// TODO: terminar la documentacion, revisar la de todas las funciones porque
-// hubieron muchos cambios. Documentar como resolvemos el tema de los caracteres
-// especiales y pensar si pueden haber bugs en ese tema. Explicar por que
-// sacrificamos performance por usar una GList doblemente enlazada circular.
-
 // MODO DE USO:
 //  $ ./parte1 [nombres.txt] [paises.txt] [personas.txt]
 // Se genera un archivo con el nombre [personas.txt] con las personas generadas
