@@ -4,7 +4,7 @@
 #include "util.h"
 
 // TODO: cambiar documentacion sobre maps y filters usados
-// TODO: cambiar los "devuelve la persona" a "devuelve un puntero a la persona"
+
 // MODO DE USO:
 // Si no lo hizo todavia, compile ejecutando:
 //  $ gcc -c util.c -Wall -pedantic
@@ -16,7 +16,8 @@
 // funciones glist_map y glist_filter.
 // glist_map:
 // - "envejecidas.txt": contiene los datos de las personas pero con 100 años mas
-// - "solo_nombres.txt": contiene solo los nombres de las personas
+// - "argentinizados.txt": contiene los datos de las personas pero con
+//                         "Argentina" como lugar de nacimiento
 // glist_filter:
 // - "con_nombres_cortos.txt": contiene solo los datos de las personas cuyos
 //                             nombres tienen 6 caracteres o menos.

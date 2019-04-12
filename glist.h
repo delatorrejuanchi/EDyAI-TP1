@@ -3,6 +3,13 @@
 
 #include <stdio.h>
 
+// COMENTARIOS:
+// Implementacion de listas doblemente enlazadas circulares: Decidimos usar
+// listas doblemente enlazadas por el hecho de aumentar la velocidad al
+// momento de agregar un elemento al final de la lista. Esto es ya que
+// queremos mantener el orden de las lista por lo cual tenemos que utilizar
+// glist_agregar_final
+
 typedef struct _GNodo {
   void *dato;
   struct _GNodo *ant;
