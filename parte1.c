@@ -58,8 +58,6 @@ int main(int argc, char* argv[]) {
   srand(time(NULL));
 
   GList nombres = glist_desde_archivo(argv[1], 0);
-  glist_recorrer(nombres, imprimir_cadena);
-
   GList paises = glist_desde_archivo(argv[2], 0);
   if (nombres == NULL || paises == NULL) {
     printf("Error: Verifique que los archivos ingresados existen y que son no");
