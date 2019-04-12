@@ -1,7 +1,8 @@
 # EDyAI - TRABAJO PRACTICO 1
+## Juan Cruz de La Torre y Bautista Marelli
 ---
 
-## Modo de uso
+### Modo de uso
 
 ```sh
 $ make
@@ -11,9 +12,9 @@ $ ./parte2 [personas.txt]
 
 Dentro de `parte1.c` y `parte2.c` hay información más detallada del funcionamiento de cada programa respectivamente.
 
-## Comentarios sobre la implementación
+### Comentarios sobre la implementación
 
-- Decidimos usar listas doblemente enlazadas circulares sobre listas simplemente enlazadas porque en muchos casos debimos usar `glist_agregar_final` (para mantener el orden de la lista al hacer `glist_map` y `glist_filter`, por ejemplo). Además, nos sirve la posibilidad de recorrer la lista en las dos direcciones al tomar un dato al azar de la lista en `glist_dato_random`.
+- Decidimos usar listas doblemente enlazadas circulares sobre listas simplemente enlazadas porque en muchos casos debimos usar `glist_agregar_final` (para mantener el orden de la lista al hacer `glist_map` y `glist_filter`, por ejemplo). Además, nos es útil la posibilidad de recorrer la lista en las dos direcciones al tomar un dato al azar de la lista en `glist_dato_random`.
 
 - Para la lectura de los archivos, hicimos lo siguiente:
   - Creamos una función `get_line` que recibe un puntero a un archivo y un flag permitirSimbolos, y devuelve una línea del archivo.
