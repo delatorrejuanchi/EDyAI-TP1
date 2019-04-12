@@ -9,6 +9,12 @@ typedef struct {
   char *lugarDeNacimiento;
 } Persona;
 
+// es_simbolo: char -> int
+// Recibe un caracter,
+// Devuelve verdadero si el caracter es un simbolo de la tabla ASCII, falso en
+// caso contrario.
+int es_simbolo(char c);
+
 // get_line: FILE* int -> char*
 // Recibe un puntero a un archivo y un flag permitirSimbolos,
 // Lee una linea del archivo,
@@ -16,12 +22,6 @@ typedef struct {
 // Si permitirSimbolos es verdadero, no excluye ningún caracter.
 // Si no hay mas lineas para leer, devuelve NULL.
 char *get_line(FILE *archivo, int permitirSimbolos);
-
-// es_simbolo: char -> int
-// Recibe un caracter,
-// Devuelve verdadero si el caracter es un simbolo de la tabla ASCII, falso en
-// caso contrario.
-int es_simbolo(char c);
 
 // imprimir_persona: void* -> void
 // Recibe un puntero a un dato (Persona*),

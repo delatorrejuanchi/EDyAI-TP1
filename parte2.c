@@ -9,7 +9,7 @@
 // funciones glist_map y glist_filter.
 // glist_map:
 // - "envejecidas.txt": contiene los datos de las personas pero con 100 años mas
-// - "argentinizados.txt": contiene los datos de las personas pero con
+// - "argentinizadas.txt": contiene los datos de las personas pero con
 //                         "Argentina" como lugar de nacimiento
 // glist_filter:
 // - "con_nombres_cortos.txt": contiene los datos de solo aquellas personas
@@ -121,18 +121,16 @@ int main(int argc, char *argv[]) {
   GList personas = glist_map(personasRaw, parse_persona, copiar_cadena);
   glist_destruir(personasRaw, destruir_cadena);
 
-  glist_recorrer(personas, imprimir_persona);
-
   // Maps
   // 1)
   GList envejecidas = map_y_escribir(personas, "envejecidas.txt", envejecer,
                                      escribir_persona, copiar_persona);
   glist_destruir(envejecidas, destruir_persona);
   // 2)
-  GList argentinizados =
-      map_y_escribir(personas, "argentinizados.txt", argentinizar_persona,
+  GList argentinizadas =
+      map_y_escribir(personas, "argentinizadas.txt", argentinizar_persona,
                      escribir_persona, copiar_persona);
-  glist_destruir(argentinizados, destruir_persona);
+  glist_destruir(argentinizadas, destruir_persona);
 
   // Filters
   // 1)

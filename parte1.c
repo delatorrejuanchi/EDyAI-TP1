@@ -8,13 +8,12 @@
 
 // MODO DE USO:
 //  $ ./parte1 [nombres.txt] [paises.txt] [personas.txt]
-// Se genera un archivo con el nombre [personas.txt] con las personas generadas
-// de forma alertoria segun los nombres y pasises en los archivos ingresados.
+// Crea un archivo con el nombre [personas.txt] que contiene CANTIDAD personas
+// con nombre seleccionado aleatoriamente de [nombres.txt], edad entre 1 y 100,
+// y lugarDeNacimiento seleccionado aleatoriamente de [paises.txt] [paises.txt].
 // Los archivos [nombres.txt] y [paises.txt] deben tener un dato por linea.
-// Aunque la funcion que lee las lineas de los archivos está preparada, se
-// recomienda finalizar los archivos con un salto de linea.
 // El archivo generado [personas.txt] tendra las siguientes caracteristicas:
-//  - Cada linea representa una persona generada
+//  - Cada linea representa una persona
 //  - El formato de cada linea es: nombre, edad, lugarDeNacimiento
 
 // generar_personas: GList GList -> GList
@@ -40,12 +39,12 @@ GList generar_personas(GList nombres, GList paises) {
 int main(int argc, char* argv[]) {
   if (argc != 4) {
     printf("Error: El número de argumentos ingresados es incorrecto.\n");
-    printf("Modo de uso: %s [nombres.txt] [paises.txt] [salida.txt]\n",
+    printf("Modo de uso: %s [nombres.txt] [paises.txt] [personas.txt]\n",
            argv[0]);
     return -1;
   }
 
-  srand(time(NULL));  // Iniciamos la semilla del random
+  srand(time(NULL));
 
   GList nombres = glist_desde_archivo(argv[1], 0);
   GList paises = glist_desde_archivo(argv[2], 0);
