@@ -6,10 +6,9 @@
 #define TAMANO_BUFFER_INICIAL 32
 
 int es_simbolo(char c) {
-  return ((33 <= c && c <= 64) || (91 <= c && c <= 95) ||
-          (123 <= c && c <= 126) || (155 <= c && c <= 159) ||
-          (166 <= c && c <= 180) || (184 <= c && c <= 197) ||
-          (33 <= c && c <= 64));
+  return ((0 <= c && c <= 31) || (33 <= c && c <= 64) || (91 <= c && c <= 96) ||
+          (123 <= c && c <= 127) || (155 <= c && c <= 159) ||
+          (166 <= c && c <= 255));
 }
 
 char *get_line(FILE *archivo, int permitirSimbolos) {

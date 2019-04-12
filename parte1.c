@@ -11,21 +11,16 @@
 // especiales y pensar si pueden haber bugs en ese tema. Explicar por que
 // sacrificamos performance por usar una GList doblemente enlazada circular.
 
-// MODO DE USO: Si no lo hizo todavia, compile
-// ejecutando:
-//  $ gcc -c util.c -Wall -pedantic
-//  $ gcc -c glist.c -Wall -pedantic
-//  $ gcc -o parte1 parte1.c glist.o util.o -Wall -pedantic
-// Luego:
-//  $ ./parte1 [nombres.txt] [paises.txt] [salida.txt]
-// Se genera un archivo con el nombre [salida.txt] con las personas generadas
+// MODO DE USO:
+//  $ ./parte1 [nombres.txt] [paises.txt] [personas.txt]
+// Se genera un archivo con el nombre [personas.txt] con las personas generadas
 // de forma alertoria segun los nombres y pasises en los archivos ingresados.
 // Los archivos [nombres.txt] y [paises.txt] deben tener un dato por linea.
 // Aunque la funcion que lee las lineas de los archivos está preparada, se
 // recomienda finalizar los archivos con un salto de linea.
-// El archivo generado [salida.txt] tendra las siguientes caracteristicas:
+// El archivo generado [personas.txt] tendra las siguientes caracteristicas:
 //  - Cada linea representa una persona generada
-//  - El formato de salida es: nombre, edad, lugarDeNacimiento
+//  - El formato de cada linea es: nombre, edad, lugarDeNacimiento
 
 // generar_personas: GList GList -> GList
 // Recibe una lista de nombres y una de paises,
@@ -55,7 +50,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  srand(time(NULL));
+  srand(time(NULL));  // Iniciamos la semilla del random
 
   GList nombres = glist_desde_archivo(argv[1], 0);
   GList paises = glist_desde_archivo(argv[2], 0);

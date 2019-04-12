@@ -79,7 +79,11 @@ void *glist_dato_random(GList lista) {
 
   int indice = rand() % tamano;
   GNodo *nodo = lista;
-  for (int i = 0; i < indice; i++) nodo = nodo->sig;
+  if (indice < tamano / 2) {
+    for (int i = 0; i < indice; i++) nodo = nodo->sig;
+  } else {
+    for (int i = 0; i < indice; i++) nodo = nodo->ant;
+  }
 
   return nodo->dato;
 }

@@ -3,14 +3,7 @@
 #include "glist.h"
 #include "util.h"
 
-// TODO: cambiar documentacion sobre maps y filters usados
-
 // MODO DE USO:
-// Si no lo hizo todavia, compile ejecutando:
-//  $ gcc -c util.c -Wall -pedantic
-//  $ gcc -c glist.c -Wall -pedantic
-//  $ gcc -o parte2 parte2.c glist.o util.o -Wall -pedantic
-// Luego:
 //  $ ./parte2 [personas.txt]
 // Lee la lista de personas en [personas.txt], y crea 4 archivos usando las
 // funciones glist_map y glist_filter.
@@ -19,12 +12,13 @@
 // - "argentinizados.txt": contiene los datos de las personas pero con
 //                         "Argentina" como lugar de nacimiento
 // glist_filter:
-// - "con_nombres_cortos.txt": contiene solo los datos de las personas cuyos
-//                             nombres tienen 6 caracteres o menos.
-// - "mayores_de_edad.txt": contiene solo los datos de las personas mayores de
-//                          edad
-// El archivo a recibir tiene las caracteristicas iguales al archivo de salida
-// de la parte 1.
+// - "con_nombres_cortos.txt": contiene los datos de solo aquellas personas
+//                             cuyos nombres tienen 6 caracteres o menos.
+// - "mayores_de_edad.txt": contiene los datos de solo aquellas personas que son
+//                          emayores de edad
+// El archivo a recibir debe tener las siguientes caracteristicas:
+//  - Cada linea representa una persona
+//  - El formato de cada linea debe ser: nombre, edad, lugarDeNacimiento
 
 // map_y_escribir: GList char* FMap FEscritora  FCopiadora -> GList
 // Recibe una lista, un nombre de archivo, una FMap, una FEscritora y una

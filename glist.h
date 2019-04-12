@@ -5,17 +5,19 @@
 
 // COMENTARIOS:
 // Implementacion de listas doblemente enlazadas circulares: Decidimos usar
-// listas doblemente enlazadas por el hecho de aumentar la velocidad al
-// momento de agregar un elemento al final de la lista. Esto es ya que
+// listas doblemente enlazadas por el hecho de disminuir el tiempo que se tarda
+// al momento de agregar un elemento al final de la lista. Esto es ya que
 // queremos mantener el orden de las lista por lo cual tenemos que utilizar
 // glist_agregar_final
 
+// Un GNodo es un nodo de una lista doblemente enlazada (circular).
 typedef struct _GNodo {
   void *dato;
   struct _GNodo *ant;
   struct _GNodo *sig;
 } GNodo;
 
+// Un GList es un puntero a un GNodo.
 typedef GNodo *GList;
 
 // Una función FDestructora recibe un puntero a un dato, y lo destruye. Este
@@ -40,9 +42,9 @@ typedef void *(*FCopiadora)(void *dato);
 // mismo. Este tipo de función es pasado como argumento a glist_map.
 typedef void *(*FMap)(void *dato);
 
-// Una función FPredicado recibe un puntero a un dato, y devuelve verdadero o
-// falso dependiendo de si el dato satisface o no un cierto predicado. Este tipo
-// de función es pasado como argumento a glist_filter.
+// Una función FPredicado recibe un puntero a un dato, y devuelve 1 (verdadero)
+// o 0 (falso) dependiendo de si el dato satisface o no un cierto predicado.
+// Este tipo de función es pasado como argumento a glist_filter.
 typedef int (*FPredicado)(void *dato);
 
 // glist_crear: -> GList
