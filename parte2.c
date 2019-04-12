@@ -79,7 +79,7 @@ void *parse_persona(void *dato) {
 // envejecer: void* -> void*
 // Recibe un puntero a un dato (Persona*),
 // Le suma 100 años a su edad,
-// Devuelve la persona.
+// Devuelve un puntero a la persona.
 // Esta funcion es de tipo FMap.
 void *envejecer(void *dato) {
   Persona *persona = dato;
@@ -87,10 +87,10 @@ void *envejecer(void *dato) {
   return persona;
 }
 
-// argentinizar?persona: void* -> void*
+// argentinizar_persona: void* -> void*
 // Recibe un puntero a un dato (Persona*),
 // Cambia el lugarDeNacimiento a "Argentina",
-// Devuelve la persona.
+// Devuelve un puntero a la persona.
 // Esta funcion es de tipo FMap.
 void *argentinizar_persona(void *dato) {
   Persona *persona = dato;
