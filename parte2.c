@@ -4,6 +4,7 @@
 #include "util.h"
 
 // TODO: cambiar documentacion sobre maps y filters usados
+// TODO: cambiar los "devuelve la persona" a "devuelve un puntero a la persona"
 // MODO DE USO:
 // Si no lo hizo todavia, compile ejecutando:
 //  $ gcc -c util.c -Wall -pedantic
@@ -52,6 +53,9 @@ GList filter_y_escribir(GList lista, char *nombre, FPredicado p, FEscritora e,
   return nuevaLista;
 }
 
+// parse_persona: void* -> void*
+// Recibe un puntero a un dato (char*) con los datos de una persona,
+// Devuelve un puntero a una persona con dichos datos.
 void *parse_persona(void *dato) {
   Persona *persona = malloc(sizeof(Persona));
 
