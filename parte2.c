@@ -3,6 +3,7 @@
 #include "glist.h"
 #include "util.h"
 
+// TODO: cambiar documentacion sobre maps y filters usados
 // MODO DE USO:
 // Si no lo hizo todavia, compile ejecutando:
 //  $ gcc -c util.c -Wall -pedantic
@@ -26,9 +27,10 @@
 // map_y_escribir: GList char* FMap FEscritora  FCopiadora -> GList
 // Recibe una lista, un nombre de archivo, una FMap, una FEscritora y una
 // FCopiadora,
-// Escribe un archivo con el nombre recibido y contenido generado
-// por la FEscritora sobre una nueva lista generada por la FMap aplicada a la
-// lista recibida, Devuelve esta nueva lista
+// Aplica la FMap a una copia (creada por la FCopiadora) de cada dato de la
+// lista. Escribe un archivo con el nombre recibido y contenido generado por la
+// FEscritora sobre esta nueva lista,
+// Devuelve esta nueva lista.
 GList map_y_escribir(GList lista, char *nombre, FMap f, FEscritora e,
                      FCopiadora copiar) {
   GList nuevaLista = glist_map(lista, f, copiar);
@@ -39,15 +41,14 @@ GList map_y_escribir(GList lista, char *nombre, FMap f, FEscritora e,
 // filter_y_escribir: GList char* FPredicado FEscritora FCopiadora -> GList
 // Recibe una lista, un nombre de archivo, una FPredicado, una FEscritora y una
 // FCopiadora,
-// Escribe un archivo con el nombre recibido y contenido generado por la
-// FEscritora sobre una nueva lista generada por la FPredicado aplicada a la
-// lista recibida,
-// Devuelve esta nueva lista
-// TODO: completar
+// Filtra la lista creando una copia (aplicando la FCopiadora) de cada elemento
+// que satisface la FPredicado. Escribe un archivo con el nombre recibido y
+// contenido generado por la FEscritora sobre esta nueva lista,
+// Devuelve esta nueva lista.
 GList filter_y_escribir(GList lista, char *nombre, FPredicado p, FEscritora e,
                         FCopiadora copiar) {
   GList nuevaLista = glist_filter(lista, p, copiar);
-  // glist_a_archivo(nuevaLista, nombre, e);
+  glist_a_archivo(nuevaLista, nombre, e);
   return nuevaLista;
 }
 
@@ -71,18 +72,22 @@ void *parse_persona(void *dato) {
   return persona;
 }
 
-// TODO: completar
 // envejecer: void* -> void*
-// Recibe un puntero a un dato,
-// Le suma 100 años a la edad,
-// Devuelve el dato editado
+// Recibe un puntero a un dato (Persona*),
+// Le suma 100 años a su edad,
+// Devuelve la persona.
+// Esta funcion es de tipo FMap.
 void *envejecer(void *dato) {
   Persona *persona = dato;
   persona->edad += 100;
   return persona;
 }
 
-// TODO: completar
+// argentinizar?persona: void* -> void*
+// Recibe un puntero a un dato (Persona*),
+// Cambia el lugarDeNacimiento a "Argentina",
+// Devuelve la persona.
+// Esta funcion es de tipo FMap.
 void *argentinizar_persona(void *dato) {
   Persona *persona = dato;
   free(persona->lugarDeNacimiento);
@@ -91,12 +96,19 @@ void *argentinizar_persona(void *dato) {
   return persona;
 }
 
-// TODO: completar
+// tiene_nombre_corto: void* -> int
+// Recibe un puntero a un dato (Persona*),
+// Devuelve verdadero si la longitud del nombre es menor o igual a 6, falso en
+// caso contrario.
+// Esta funcion es de tipo FPredicado.
 int tiene_nombre_corto(void *dato) {
   return strlen(((Persona *)dato)->nombre) <= 6;
 }
 
-// TODO: completar
+// es_mayor_de_edad: void* -> int
+// Recibe un puntero a un dato (Persona*),
+// Devuelve verdadero si la edad es mayor o igual a 18, falso en caso contrario.
+// Esta funcion es de tipo FPredicado.
 int es_mayor_de_edad(void *dato) { return ((Persona *)dato)->edad >= 18; }
 
 int main(int argc, char *argv[]) {

@@ -3,29 +3,48 @@
 
 #include <stdio.h>
 
-typedef void (*FDestructora)(void *dato);
-typedef void (*FVisitante)(void *dato);
-typedef void (*FEscritora)(void *dato, FILE *archivo);
-typedef void *(*FCopiadora)(void *dato);
-typedef void *(*FMap)(void *dato);
-typedef int (*FPredicado)(void *dato);
-
 typedef struct _GNodo {
   void *dato;
-  struct _GNodo *sig;
   struct _GNodo *ant;
+  struct _GNodo *sig;
 } GNodo;
 
 typedef GNodo *GList;
 
+// Una función FDestructora recibe un puntero a un dato, y lo destruye. Este
+// tipo de función es pasado como argumento a glist_destruir.
+typedef void (*FDestructora)(void *dato);
+
+// Una función FVisitante recibe un puntero a un dato, y realiza alguna acción.
+// Este tipo de función es pasado como argumento a glist_recorrer.
+typedef void (*FVisitante)(void *dato);
+
+// Una función FEscritora recibe un puntero a un dato y un puntero a un archivo,
+// y escribe el dato al archivo de alguna manera. Este tipo de función es pasado
+// como argumento a glist_a_archivo.
+typedef void (*FEscritora)(void *dato, FILE *archivo);
+
+// Una función FCopiadora recibe un puntero a un dato, y devuelve una copia del
+// mismo. Este tipo de función es pasado como argumento a glist_map y a
+// glist_filter.
+typedef void *(*FCopiadora)(void *dato);
+
+// Una función FMap recibe un puntero a un dato, y devuelve una alteración del
+// mismo. Este tipo de función es pasado como argumento a glist_map.
+typedef void *(*FMap)(void *dato);
+
+// Una función FPredicado recibe un puntero a un dato, y devuelve verdadero o
+// falso dependiendo de si el dato satisface o no un cierto predicado. Este tipo
+// de función es pasado como argumento a glist_filter.
+typedef int (*FPredicado)(void *dato);
+
 // glist_crear: -> GList
-// Devuelve una lista vacía
+// Devuelve una lista vacía.
 GList glist_crear();
 
-// TODO: corregir
-// glist_destruir: GList -> void;
-// Recibe una lista,
-// La destruye.
+// glist_destruir: GList FDestructora -> void;
+// Recibe una lista y una FDestructora,
+// Ejecuta la FDestructora al dato de cada nodo y destruye todos los nodos.
 void glist_destruir(GList lista, FDestructora destruir);
 
 // glist_vacia: GList -> int;
@@ -57,12 +76,14 @@ int glist_longitud(GList lista);
 
 // glist_dato_random: GList -> void*
 // Recibe una lista,
-// Devuelve el dato de un nodo de la lista (elegido al azar)
+// Devuelve el dato de un nodo elegido al azar de la lista.
 void *glist_dato_random(GList lista);
 
-// glist_desde_archivo: char* -> GList
-// Recibe un nombre de archivo,
+// glist_desde_archivo: char* int -> GList
+// Recibe un nombre de archivo y un flag permitirSimbolos,
 // Crea y devuelve una lista cuyos nodos contienen las lineas del archivo.
+// Si permitirSimbolos es falso, excluye a todos los simbolos de la tabla ASCII.
+// Si permitirSimbolos es verdadero, no excluye ningún caracter.
 // Si el archivo no existe, devuelve NULL.
 GList glist_desde_archivo(char *nombre, int permitirSimbolos);
 
@@ -73,18 +94,17 @@ GList glist_desde_archivo(char *nombre, int permitirSimbolos);
 // FEscritora.
 void glist_a_archivo(GList lista, char *nombre, FEscritora escribir);
 
-// TODO: corregir
-// glist_map: GList FMap -> GList
-// Recibe una lista y una FMap,
+// glist_map: GList FMap FCopiadora -> GList
+// Recibe una lista, una FMap y una FCopiadora
 // Crea y devuelve una lista cuyos datos son los resultados de aplicar la FMap a
-// cada dato de la lista recibida.
+// una copia de cada dato (creada por la FCopiadora) de la lista recibida.
 GList glist_map(GList lista, FMap f, FCopiadora copiar);
 
-// TODO: corregir
-// glist_filter: GList FPredicado -> GList
-// Recibe una lista y una FPredicado,
-// Crea y devuelve una lista cuyos datos son solo aquellos para los cuales la
-// FPredicado aplicada a cada dato devuelve verdadero.
+// glist_filter: GList FPredicado FCopiadora -> GList
+// Recibe una lista, una FPredicado y una FCopiadora,
+// Crea y devuelve una lista cuyos datos son copias (creadas por la
+// FCopiadora) de los datos de la lista para los cuales la aplicación de
+// FPredicado devuelve verdadero.
 GList glist_filter(GList lista, FPredicado p, FCopiadora copiar);
 
 #endif /* __GLIST_H__ */

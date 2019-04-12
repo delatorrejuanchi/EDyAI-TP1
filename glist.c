@@ -119,7 +119,7 @@ GList glist_map(GList lista, FMap f, FCopiadora copiar) {
   GNodo *nodo = lista;
   do {
     void *dato = copiar(nodo->dato);
-    nuevaLista = glist_agregar_inicio(nuevaLista, f(dato));
+    nuevaLista = glist_agregar_final(nuevaLista, f(dato));
     nodo = nodo->sig;
   } while (nodo != lista);
 

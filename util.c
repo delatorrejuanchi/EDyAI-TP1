@@ -12,77 +12,58 @@ int es_simbolo(char c) {
           (33 <= c && c <= 64));
 }
 
-// TODO: ver el tema de los caracteres especiales
-// TODO: completar
 char *get_line(FILE *archivo, int permitirSimbolos) {
   int tamano = TAMANO_BUFFER_INICIAL;
 
   char c = fgetc(archivo);
+
+  // prevenimos que dos saltos de linea seguidos creen una cadena vacia.
   while ((c == '\n' || c == '\r') && c != EOF) c = fgetc(archivo);
+
   if (c == EOF) return NULL;
 
-  char *line = malloc(sizeof(char) * (tamano + 1));
+  char *buffer = malloc(sizeof(char) * (tamano + 1));
 
   int i = 0;
-  while ((c != '\n' && c != '\r')) {
+  while ((c != '\n' && c != '\r' && c != EOF)) {
     if (i == tamano) {
       tamano *= 2;
-      line = realloc(line, sizeof(char) * (tamano + 1));
+      buffer = realloc(buffer, sizeof(char) * (tamano + 1));
     }
 
-    if (!es_simbolo(c) || permitirSimbolos) {
-      line[i++] = c;
+    if (permitirSimbolos || !es_simbolo(c)) {
+      buffer[i++] = c;
     }
 
     c = fgetc(archivo);
   }
-  line[i] = '\0';
+  buffer[i] = '\0';
 
-  line = realloc(line, sizeof(char) * (strlen(line) + 1));
+  buffer = realloc(buffer, sizeof(char) * (strlen(buffer) + 1));
 
-  return line;
+  return buffer;
 }
 
-// imprimir_persona: void* -> void
-// Recibe un puntero a un dato (Persona*),
-// Muestra en pantalla los datos de la persona con el formato:
-// "nombre, edad, lugarDeNacimiento"
-// Esta funcion es de tipo FVisitante.
 void imprimir_persona(void *dato) {
   Persona *persona = dato;
   printf("%s, %d, %s\n", persona->nombre, persona->edad,
          persona->lugarDeNacimiento);
 }
 
-// imprimir_cadena: void* -> void
-// Recibe un puntero a un dato (char*),
-// Muestra en pantalla el contenido de la cadena.
-// Esta funcion es de tipo FVisitante.
 void imprimir_cadena(void *dato) { printf("%s\n", (char *)dato); }
 
-// escribir_persona: void* FILE* -> void
-// Recibe un puntero a un dato (Persona*) y un puntero a un archivo,
-// Escribe una linea en el archivo con los datos de la persona con el formato:
-// "nombre, edad, lugarDeNacimiento"
-// Esta funcion es de tipo FEscritora.
 void escribir_persona(void *dato, FILE *archivo) {
   Persona *persona = dato;
   fprintf(archivo, "%s, %d, %s\n", persona->nombre, persona->edad,
           persona->lugarDeNacimiento);
 }
 
-// escribir_cadena: void* FILE* -> void
-// Recibe un puntero a un dato (char*) y un puntero a un archivo,
-// Escribe una linea en el archivo con el contenido de la cadena.
-// Esta funcion es de tipo FEscritora.
 void escribir_cadena(void *dato, FILE *archivo) {
   fprintf(archivo, "%s\n", (char *)dato);
 }
 
-// TODO: completar
 void destruir_cadena(void *dato) { free(dato); }
 
-// TODO: completar
 void destruir_persona(void *dato) {
   Persona *persona = dato;
   free(persona->nombre);
@@ -90,7 +71,6 @@ void destruir_persona(void *dato) {
   free(persona);
 }
 
-// TODO: completar
 void *copiar_persona(void *dato) {
   Persona *persona = dato;
   Persona *nueva = malloc(sizeof(Persona));

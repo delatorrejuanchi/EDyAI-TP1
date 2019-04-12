@@ -21,6 +21,8 @@
 // Se genera un archivo con el nombre [salida.txt] con las personas generadas
 // de forma alertoria segun los nombres y pasises en los archivos ingresados.
 // Los archivos [nombres.txt] y [paises.txt] deben tener un dato por linea.
+// Aunque la funcion que lee las lineas de los archivos está preparada, se
+// recomienda finalizar los archivos con un salto de linea.
 // El archivo generado [salida.txt] tendra las siguientes caracteristicas:
 //  - Cada linea representa una persona generada
 //  - El formato de salida es: nombre, edad, lugarDeNacimiento
@@ -56,6 +58,8 @@ int main(int argc, char* argv[]) {
   srand(time(NULL));
 
   GList nombres = glist_desde_archivo(argv[1], 0);
+  glist_recorrer(nombres, imprimir_cadena);
+
   GList paises = glist_desde_archivo(argv[2], 0);
   if (nombres == NULL || paises == NULL) {
     printf("Error: Verifique que los archivos ingresados existen y que son no");
